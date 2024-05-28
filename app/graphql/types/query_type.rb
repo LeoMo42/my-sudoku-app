@@ -5,15 +5,6 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :items,
-          [Types::ItemType],
-          null: false,
-          description: "Return a list of items"
-
-    def items
-      Item.all
-    end
-
     field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
       argument :id, ID, required: true, description: "ID of the object."
     end
@@ -33,11 +24,14 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    field :items,
+          [Types::ItemType],
+          null: false,
+          description: "Return a list of items"
+
+    def items
+      Item.all
     end
+
   end
 end
